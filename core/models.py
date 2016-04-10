@@ -19,7 +19,7 @@ class News(models.Model):
     title = models.CharField(max_length=100, unique=True)
     sub_title = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
-    photo = models.ImageField('Photo',  upload_to="news", blank=True)
+    photo = models.ImageField('Photo', upload_to="news", blank=True)
     body = tinymce_models.HTMLField()
     source = models.CharField('Source', max_length=70)
     writer = models.ForeignKey('Person', related_name='news_writer')
