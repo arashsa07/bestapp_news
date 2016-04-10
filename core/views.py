@@ -78,3 +78,34 @@ def search_news(request, category_id, regex):
     return JsonResponse(result, safe=False)
 
 
+@csrf_exempt
+def get_news(request, agency_id):
+    try:
+        data = json.loads(request.body)
+    except KeyError:
+        return HttpResponseServerError("Malformed data!")
+
+    limit = data.get('limit', 25)
+    offset = data.get('offset', 0)
+    order_by = data.get('order_by', 'id')
+
+    try:
+        limit = int(limit)
+    except ValueError:
+        limit = 25
+    else:
+        if limit > 25:
+            limit = 25
+
+    try:
+        offset = int(offset)
+    except ValueError:
+        offset = 0
+
+    category = Category.objects.filter(agency_id=agency_id)
+    queryset = News.objects.filter(category=category).order_by(order_by)
+
+    result = [{'id': item.id, 'url': item.url, 'category': item.category.title, 'category_id': item.category.id}
+              for item in queryset[offset: limit+offset]]
+
+    return JsonResponse(result, safe=False)

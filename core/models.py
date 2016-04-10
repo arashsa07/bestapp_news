@@ -52,7 +52,7 @@ class Category(models.Model):
         unique_together = ('agency', 'parent', 'title')
 
     def __unicode__(self):
-        return '%s - %s' % (self.agency, self.title)
+        return '%s - %s'.decode('utf-8') % (self.agency, self.title)
 
     def clean(self):
         if self.slug:
