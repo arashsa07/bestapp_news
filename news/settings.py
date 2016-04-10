@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'tinymce',
     'sorl.thumbnail',
     'mce_filebrowser',
+    'rest_framework',
     'core'
 )
 
