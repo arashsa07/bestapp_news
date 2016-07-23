@@ -112,5 +112,5 @@ def get_news(request, agency_id):
         result = NewsSerializer(news, many=True)
         return Response(result.data)
     else:
-        return Response({})
+        return Response([])
 
