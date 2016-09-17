@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ilc=1ajuxj)mn-%1u+il(5&7ces=i&2vh=b%%9zthgxaniz1il'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -83,13 +83,13 @@ from db_config import *
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+# USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)

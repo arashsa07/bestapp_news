@@ -3,7 +3,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'news',
-        'USER': 'root',
-        'PASSWORD': '123456',
+        'USER': 'news',
+        'PASSWORD': 'xym1!',
     }
 }
