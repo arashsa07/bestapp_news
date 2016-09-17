@@ -7,7 +7,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 from serializer import NewsSerializer
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes, throttle_classes
+from rest_framework.decorators import api_view
+from rest_framework import status
 
 import json
 
@@ -80,30 +81,18 @@ def search_news(request, category_id, regex):
         return Response({})
 
 
-
-@csrf_exempt
-@api_view(['POST'])
+@api_view(['GET'])
 def get_news(request, agency_id):
 
     limit = request.data.get('limit', 25)
     offset = request.data.get('offset', 0)
     order_by = request.data.get('order_by', 'id')
 
-    if order_by not in News._meta.get_all_field_names():
-        HttpResponseServerError("Malformed data!")
-
-    try:
-        limit = int(limit)
-    except ValueError:
-        limit = 25
-    else:
-        if limit > 25:
-            limit = 25
-
     try:
         offset = int(offset)
+        limit = int(limit)
     except ValueError:
-        offset = 0
+        return Response({'error': 406, 'message': 'query values not acceptable'}, status=status.HTTP_406_NOT_ACCEPTABLE)
 
     category = Category.objects.filter(agency_id=agency_id)
     news = News.objects.filter(category__in=category).order_by(order_by)[offset: limit+offset]
@@ -112,5 +101,5 @@ def get_news(request, agency_id):
         result = NewsSerializer(news, many=True)
         return Response(result.data)
     else:
-        return Response({})
+        return Response([{}])
 
