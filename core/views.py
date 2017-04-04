@@ -86,7 +86,7 @@ def get_news(request, agency_id):
 
     limit = request.data.get('limit', 25)
     offset = request.data.get('offset', 0)
-    order_by = request.data.get('order_by', 'id')
+    order_by = request.data.get('order_by', '-id')
 
     try:
         offset = int(offset)
