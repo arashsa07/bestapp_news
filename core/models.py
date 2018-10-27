@@ -10,7 +10,7 @@ class Agency(models.Model):
         db_table = 'agencies'
         verbose_name_plural = 'agencies'
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s' % self.name
 
 
@@ -30,7 +30,7 @@ class News(models.Model):
         db_table = 'news'
         verbose_name_plural = 'news'
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s' % self.title
 
     def get_absolute_url(self):
@@ -51,7 +51,7 @@ class Category(models.Model):
         verbose_name_plural = 'categories'
         unique_together = ('agency', 'parent', 'title')
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s - %s'.decode('utf-8') % (self.agency, self.title)
 
     def clean(self):
@@ -75,5 +75,5 @@ class Person(models.Model):
     class Meta:
         db_table = 'person'
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s %s" % (self.name, self.family)

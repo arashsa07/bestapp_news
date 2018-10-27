@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import News, Category, Person, Agency
+from .models import News, Category, Person, Agency
 from mce_filebrowser.admin import MCEFilebrowserAdmin
 
 
